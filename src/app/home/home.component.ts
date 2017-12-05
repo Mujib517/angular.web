@@ -1,78 +1,26 @@
 import { Component } from "@angular/core";
 
-//Interpolation or expressions {{}}
-//Property binding []
-//Event binding ()
-//Two way binding ngModel
-//Class binding
-//Style binding
-
 @Component({
     selector: 'app-home',
-    template: `<h1 [ngClass]="clsName">Home</h1>
-
-    <div *ngIf="show" [ngStyle]="styles">
-        This is a div
-        <div>Complex div</div>
-    </div>
-
-    <div [ngSwitch]="priority">
-        <div *ngSwitchCase="'High'">High Priority</div>
-        <div *ngSwitchCase="'medium'">Medium Priority</div>
-        <div *ngSwitchCase="'low'">Low Priority</div>
-        <div *ngSwitchDefault>Very Low Priority</div>
-    </div>
-    
-
-    <button (click)="toggle()">Toggle</button>
-    
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Value</th>
-                <th>Index</th>
-                <th>Even?</th>
-                <th>Odd?</th>
-                <th>First?</th>
-                <th>Last?</th>
-            </tr>
-        </thead>
-        <tr
-        [ngClass]="evn?'table-bg1':'table-bg2'" 
-        *ngFor="let val of arr;let idx=index;let evn=even; let odd=odd;let fst=first;let lst=last;">
-            <td>{{val}}</td>
-            <td>{{idx}}</td>
-            <td>{{evn}}</td>
-            <td>{{odd}}</td>
-            <td>{{fst}}</td>
-            <td>{{lst}}</td>
-        </tr>
-    </table>
-
+    template: `
+    <br/>
+        <div class="col-md-5">
+            <div *ngFor="let product of products" class="well">
+                <h3>{{product.brand}} {{product.model}}</h3>
+                <div>{{product.price}}</div>
+                <div>InStock: <input disabled="true" type="checkbox" [checked]="product.inStock" /></div>
+            </div>
+        </div>
     `
 })
 export class HomeComponent {
-    arr: Array<number> = [1, 2, 3, 4, 5, 6];
-    show: boolean = true;
-    priority: string = "abc";
-    clsName: string[] = ["bg", "fg"];
-    styles: any = {
-        'background-color': 'yellow',
-        'color': 'red'
-    };
+    products: any[];
 
-    toggle() {
-
-        // this.show = this.show ? false : true;
-
-        this.show = !this.show;
-
-
-        // if (this.show) {
-        //     this.show = false;
-        // }
-        // else {
-        //     this.show = true;
-        // }
+    constructor() {
+        this.products = [
+            { id: 1, brand: "Nokia", model: "N8", price: 200, inStock: true },
+            { id: 2, brand: "Samsung", model: "S8", price: 800, inStock: true },
+            { id: 3, brand: "Apple", model: "Iphone X", price: 1200, inStock: false }
+        ];
     }
 }
