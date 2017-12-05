@@ -9,50 +9,70 @@ import { Component } from "@angular/core";
 
 @Component({
     selector: 'app-home',
-    template: `
+    template: `<h1 [ngClass]="clsName">Home</h1>
 
-    <input type="text" [(ngModel)]="title" placeholder="Enter text"/>
+    <div *ngIf="show" [ngStyle]="styles">
+        This is a div
+        <div>Complex div</div>
+    </div>
 
-    <button [style.border]="title?'3px solid gray':'none'" [disabled]="getTitle()">Click me</button>
+    <div [ngSwitch]="priority">
+        <div *ngSwitchCase="'High'">High Priority</div>
+        <div *ngSwitchCase="'medium'">Medium Priority</div>
+        <div *ngSwitchCase="'low'">Low Priority</div>
+        <div *ngSwitchDefault>Very Low Priority</div>
+    </div>
+    
 
-    <button [class.bg]="title" (click)="onClick()" >Button 2</button>
-
-    <select (change)="onChange()">
-        <option>C</option>
-        <option>C#</option>
-        <option>C++</option>
-        <option>Java</option>
-    </select>
-
-    {{1+2}}
-
-    <h1> {{"Sheldon" + " Cooper"}}</h1>
-
-    <h1>{{title}}</h1>
-
-    <h2>{{getTitle()}}</h2>
-
-    {{1===2?"Yes":"No"}}
-
-
-
+    <button (click)="toggle()">Toggle</button>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Value</th>
+                <th>Index</th>
+                <th>Even?</th>
+                <th>Odd?</th>
+                <th>First?</th>
+                <th>Last?</th>
+            </tr>
+        </thead>
+        <tr
+        [ngClass]="evn?'table-bg1':'table-bg2'" 
+        *ngFor="let val of arr;let idx=index;let evn=even; let odd=odd;let fst=first;let lst=last;">
+            <td>{{val}}</td>
+            <td>{{idx}}</td>
+            <td>{{evn}}</td>
+            <td>{{odd}}</td>
+            <td>{{fst}}</td>
+            <td>{{lst}}</td>
+        </tr>
+    </table>
 
     `
 })
 export class HomeComponent {
-    title: string = "Angular Web";
+    arr: Array<number> = [1, 2, 3, 4, 5, 6];
+    show: boolean = true;
+    priority: string = "abc";
+    clsName: string[] = ["bg", "fg"];
+    styles: any = {
+        'background-color': 'yellow',
+        'color': 'red'
+    };
 
-    getTitle() {
-        //side effects
-        //complex logic
-        return this.title;
-    }
+    toggle() {
 
-    onChange() {
-        console.log("Dropdown list changed");
-    }
+        // this.show = this.show ? false : true;
 
-    onClick() {
-        console.log("Button clicked");
+        this.show = !this.show;
+
+
+        // if (this.show) {
+        //     this.show = false;
+        // }
+        // else {
+        //     this.show = true;
+        // }
     }
 }
