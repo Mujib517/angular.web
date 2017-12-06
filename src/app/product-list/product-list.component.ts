@@ -3,11 +3,12 @@ import { Component } from "@angular/core";
 @Component({
     selector: 'app-products',
     template: `<h1>Products</h1>
-    <div class="col-md-5">
-        <div *ngFor="let product of products" class="well">
-          <app-product [product]="product"></app-product>
-        </div>
+  
+    <div class="well" *ngFor="let prd of products">
+        <app-product [product]="prd"></app-product>
     </div>
+
+
     `
 })
 export class ProductsComponent {
