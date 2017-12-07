@@ -1,0 +1,6 @@
+<div class="col-md-5">
+  <div class="well" *ngFor="let user of users | async">
+    <h3>{{user.login}}</h3>
+    <img [src]="user.avatar_url" width="100" height="100" class="img img-circle" />
+  </div>
+</div>

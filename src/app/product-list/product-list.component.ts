@@ -11,14 +11,21 @@ import { ProductService } from "../shared/product.service";
     `
 })
 export class ProductsComponent {
-    products: any[];
+    products:any[];
 
-    constructor(productSvc:ProductService) {
+    constructor(productSvc: ProductService) {
         //evil
         //let productSvc = new ProductService(1,2);
-        this.products = productSvc.get();
+        productSvc.get()
+            .subscribe(
+            response => {
+                this.products = response["products"];
+                console.log(this.products);
+            },
+            err => console.log(err)
+            );
     }
-}  
+}
 
 //structuremap, NInject
 
