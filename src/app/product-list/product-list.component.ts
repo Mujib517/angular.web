@@ -3,20 +3,28 @@ import { ProductService } from "../shared/product.service";
 
 @Component({
     selector: 'app-products',
-    template: `<h1>Products</h1>
-  
-    <div class="well" *ngFor="let prd of products">
-        <app-product [product]="prd"></app-product>
-    </div>
-    `
+    templateUrl: './product-list.html'
 })
 export class ProductsComponent {
-    products:any[];
+    products: any[];
+    product: any = {};
 
-    constructor(productSvc: ProductService) {
-        //evil
-        //let productSvc = new ProductService(1,2);
-        productSvc.get()
+    constructor(private productSvc: ProductService) {
+        this.get();
+    }
+
+    onSave() {
+        this.product.inStock = this.product.inStock || false;
+        this.productSvc.save(this.product)
+            .subscribe(
+            () => this.get(),
+            err => this.get(),
+            () => console.log("Completed")
+            )
+    }
+
+    get() {
+        this.productSvc.get()
             .subscribe(
             response => {
                 this.products = response["products"];
@@ -24,11 +32,6 @@ export class ProductsComponent {
             },
             err => console.log(err)
             );
+        this.product = {};
     }
 }
-
-//structuremap, NInject
-
-// let productSvc=new ProductService({});
-// let productsComponent=new ProductsComponent(produtSvc);
-
