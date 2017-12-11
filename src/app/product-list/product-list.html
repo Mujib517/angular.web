@@ -1,33 +1,102 @@
 <h1>Products</h1>
+<div class="row">
 
-<div class="col-md-5">
-    <div class="form-group">
-        <select [(ngModel)]="product.brand" class="form-control">
-            <option>Apple</option>
-            <option>Nokia</option>
-            <option>Samsung</option>
-            <option>Nokia</option>
-            <option>LG</option>
-            <option>Xiomi</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <input type="text" placeholder="Model" class="form-control" [(ngModel)]="product.model" />
-    </div>
-    <div class="form-group">
-        <input type="number" placeholder="Price" class="form-control" [(ngModel)]="product.price" />
-    </div>
-    <div class="form-group">
-        InStock:
-        <input type="checkbox" [(ngModel)]="product.inStock" />
-    </div>
-    <div class="form-group">
-        <button class="btn btn-success" (click)="onSave()">Save New Product</button>
-    </div>
+    <form [formGroup]="frm">
+        <div class="form-group">
+            <select class="form-control" name="brand" required="true" [formControl]="brand">
+                <option>Apple</option>
+                <option>Nokia</option>
+                <option>Samsung</option>
+                <option>Nokia</option>
+                <option>LG</option>
+                <option>Xiomi</option>
+            </select>
+
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Model" class="form-control" required="true" name="model" minlength="3" maxlength="10" />
+
+        </div>
+        <div class="form-group">
+            <input type="number" placeholder="Price" class="form-control" name="price" pattern="[0-9]{2,}" />
+        </div>
+        <div class="form-group">
+            InStock:
+            <input type="checkbox" name="inStock" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success" (click)="onSave()">Save New Product</button>
+        </div>
+    </form>
+
+
+
+
+    <!-- <form #frm="ngForm" novalidate>
+
+        <div class="col-md-5">
+
+            <div>
+                <table class="table">
+                    <tr>
+                        <td>Control</td>
+                        <td>Invalid</td>
+                        <td>Valid</td>
+                        <td>Dirty</td>
+                        <td>Pristine</td>
+                        <td>Touched</td>
+                        <td>Errors</td>
+                    </tr>
+                    <tr>
+                        <td>Model</td>
+                        <td>{{model.invalid}}</td>
+                        <td>{{model.valid}}</td>
+                        <td>{{model.dirty}}</td>
+                        <td>{{model.pristine}}</td>
+                        <td>{{model.touched}}</td>
+                        <td>{{model.errors| json}}</td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="form-group">
+                <select [(ngModel)]="product.brand" class="form-control" name="brand" required="true" #brand="ngModel">
+                    <option>Apple</option>
+                    <option>Nokia</option>
+                    <option>Samsung</option>
+                    <option>Nokia</option>
+                    <option>LG</option>
+                    <option>Xiomi</option>
+                </select>
+                <span *ngIf="brand.dirty && brand.invalid" class="text-danger">Required</span>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Model" class="form-control" [(ngModel)]="product.model" #model="ngModel" required="true"
+                    name="model" minlength="3" maxlength="10" />
+                <span *ngIf="model.touched &&  model?.errors?.required" class="text-danger">Required</span>
+                <span *ngIf="model.touched &&  model?.errors?.minlength" class="text-danger">Min 3 Chars</span>
+                <span *ngIf="model.touched &&  model?.errors?.maxlength" class="text-danger">Max 10 Chars</span>
+            </div>
+            <div class="form-group">
+                <input type="number" placeholder="Price" class="form-control" [(ngModel)]="product.price" name="price" pattern="[0-9]{2,}"
+                    #price="ngModel" />
+                <span class="text-danger" *ngIf="price.invalid">Invalid price</span>
+            </div>
+            <div class="form-group">
+                InStock:
+                <input type="checkbox" [(ngModel)]="product.inStock" name="inStock" />
+            </div>
+            <div class="form-group">
+                <button [disabled]="frm.invalid" class="btn btn-success" (click)="onSave()">Save New Product</button>
+            </div>
+        </div>
+    </form> -->
 </div>
-
-
-
-<div class="well" *ngFor="let prd of products">
-    <app-product [product]="prd"></app-product>
+<div class="row">
+    <div class="col-md-6">
+        <div class="well" *ngFor="let prd of products">
+            <app-product [product]="prd"></app-product>
+        </div>
+    </div>
 </div>

@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from "./app.component";
@@ -15,9 +16,9 @@ import { TimePipe } from "./shared/time.pipe";
 
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpClientModule],
+    imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule],
     declarations: [AppComponent, HomeComponent,
-        AboutComponent, ContactComponent, ProductsComponent, ProductComponent, UsersComponent,TimePipe],
+        AboutComponent, ContactComponent, ProductsComponent, ProductComponent, UsersComponent, TimePipe],
     bootstrap: [AppComponent],
     providers: [ProductService]
 })
