@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ProductService } from "../shared/product.service";
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-products',
@@ -13,8 +13,8 @@ export class ProductsComponent {
 
     constructor(private productSvc: ProductService, private fb: FormBuilder) {
         this.frm = fb.group({
-            brand: [],
-            model: ['X8'],
+            brand: ['Nokia', [Validators.required]],
+            model: ['X8', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
             price: [200],
             inStock: [true]
         });
@@ -23,8 +23,10 @@ export class ProductsComponent {
 
     onSave() {
         this.product.inStock = this.product.inStock || false;
-
-        console.log(this.frm.value);
+        if (this.frm.valid)
+            console.log(this.frm.value);
+        else
+            console.log("validation failed");
         // this.productSvc.save(this.product)
         //     .subscribe(
         //     () => this.get(),
