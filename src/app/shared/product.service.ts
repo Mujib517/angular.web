@@ -1,25 +1,28 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { environment } from '../../environments/environment';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ProductService {
 
+    private baseUrl: string = environment.baseUrl;
+
     constructor(private httpClient: HttpClient) { }
 
     get() {
-        return this.httpClient.get("https://express-api.herokuapp.com/api/products")
+        return this.httpClient.get(this.baseUrl)
             .catch((err) => Observable.throw("Failed to load data"));
     }
 
     save(product: any) {
-        return this.httpClient.post("https://express-api.herokuapp.com/api/products", product)
+        return this.httpClient.post(this.baseUrl, product)
             .catch((err) => Observable.throw(err));
     }
 
     delete(id: string) {
-        return this.httpClient.delete("https://express-api.herokuapp.com/api/products/" + id);
+        return this.httpClient.delete(this.baseUrl + id);
     }
 }

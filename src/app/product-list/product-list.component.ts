@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ProductService } from "../shared/product.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -6,37 +6,38 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     selector: 'app-products',
     templateUrl: './product-list.html'
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit,OnDestroy {
     products: any[];
     product: any = {};
     frm: FormGroup;
+    obs;
 
-    constructor(private productSvc: ProductService, private fb: FormBuilder) {
-        this.frm = fb.group({
-            brand: ['Nokia', [Validators.required]],
-            model: ['X8', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-            price: [200],
-            inStock: [true]
+    constructor(private productSvc: ProductService, private fb: FormBuilder) { }
+
+    ngOnInit() {
+        this.frm = this.fb.group({
+            brand: ['', [Validators.required]],
+            model: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+            price: [],
+            inStock: []
         });
         this.get();
     }
 
     onSave() {
-        this.product.inStock = this.product.inStock || false;
-        if (this.frm.valid)
-            console.log(this.frm.value);
-        else
-            console.log("validation failed");
-        // this.productSvc.save(this.product)
-        //     .subscribe(
-        //     () => this.get(),
-        //     err => this.get(),
-        //     () => console.log("Completed")
-        //     )
+        if (this.frm.valid) {
+            this.productSvc.save(this.frm.value)
+                .subscribe(
+                () => this.get(),
+                err => this.get(),
+                () => console.log("Completed")
+                );
+        }
+
     }
 
     get() {
-        this.productSvc.get()
+      this.obs= this.productSvc.get()
             .subscribe(
             response => {
                 this.products = response["products"];
@@ -45,5 +46,23 @@ export class ProductsComponent {
             err => console.log(err)
             );
         this.product = {};
+    }
+
+    onNotify(data) {
+        console.log("got notification from child");
+        this.get();
+    }
+
+    onUpdateNotify(product) {
+        console.log("Updated notifiction");
+        this.frm.setValue(product);
+    }
+
+    ngOnChanges(){
+        
+    }
+
+    ngOnDestroy() {
+        this.obs.unsubscribe();
     }
 }

@@ -1,7 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProductService } from '../shared/product.service';
-
-
 
 @Component({
     selector: 'app-product',
@@ -14,6 +12,7 @@ import { ProductService } from '../shared/product.service';
         <div>{{product.lastUpdated|time}}</div>
 
         <div class="pull-right">
+            <button class="btn btn-primary btn-sm" (click)="onUpdate(product)">Update</button>
             <button class="btn btn-danger btn-sm" (click)="onDelete(product._id)">Delete</button>
         </div>
         <br/>
@@ -23,13 +22,32 @@ export class ProductComponent {
     @Input()
     product: any;
 
-    constructor(private productSvc: ProductService) { }
+    @Output()
+    notify: EventEmitter<any>;
+
+    @Output()
+    updateNotify: EventEmitter<any>;
+
+    constructor(private productSvc: ProductService) {
+        this.notify = new EventEmitter<any>();
+        this.updateNotify = new EventEmitter<any>();
+    }
 
     onDelete(id) {
         this.productSvc.delete(id)
             .subscribe(
-            () => console.log("Deleted"),
+            () => this.notify.emit({ message: "hello parent" }),
             (err) => console.log(err)
             )
+    }
+
+    onUpdate(product) {
+        delete product.img;
+        delete product.__v;
+        delete product.lastUpdated;
+        delete product._id;
+        console.log(product);
+
+        this.updateNotify.emit(product);
     }
 }
