@@ -13,8 +13,12 @@ export class ProductService {
     constructor(private httpClient: HttpClient) { }
 
     get() {
-        return this.httpClient.get(this.baseUrl)
+        return this.httpClient.get(this.baseUrl + "0/16")
             .catch((err) => Observable.throw("Failed to load data"));
+    }
+
+    getById(id: string) {
+        return this.httpClient.get(this.baseUrl + id);
     }
 
     save(product: any) {

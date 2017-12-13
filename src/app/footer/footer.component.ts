@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-contact',
+  selector: 'app-footer',
   template: `
-    <h1>
-      Contact Page
-    </h1>
+  <div class="container">
+    &copy;2017 myproducts.com
+  </div>
   `,
   styles: []
 })
-export class ContactComponent implements OnInit {
+export class FooterComponent implements OnInit {
 
   constructor() { }
 

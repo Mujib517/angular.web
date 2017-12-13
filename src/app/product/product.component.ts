@@ -4,7 +4,7 @@ import { ProductService } from '../shared/product.service';
 @Component({
     selector: 'app-product',
     template: `
-        <h3>{{product.brand | uppercase}} {{product.model | lowercase}}</h3>
+        <h3><a [routerLink]="'/products/'+product._id">{{product.brand | uppercase}} {{product.model | lowercase}}</a></h3>
         <div>{{product.price | currency:'INR'}}</div>
         <div>InStock: <input disabled="true" type="checkbox" [checked]="product.inStock" />
         <div>{{product.lastUpdated |date:"MM-dd-yyyy"}}  

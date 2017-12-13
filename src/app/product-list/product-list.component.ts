@@ -9,31 +9,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProductsComponent implements OnInit,OnDestroy {
     products: any[];
     product: any = {};
-    frm: FormGroup;
     obs;
 
     constructor(private productSvc: ProductService, private fb: FormBuilder) { }
 
     ngOnInit() {
-        this.frm = this.fb.group({
-            brand: ['', [Validators.required]],
-            model: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-            price: [],
-            inStock: []
-        });
         this.get();
-    }
-
-    onSave() {
-        if (this.frm.valid) {
-            this.productSvc.save(this.frm.value)
-                .subscribe(
-                () => this.get(),
-                err => this.get(),
-                () => console.log("Completed")
-                );
-        }
-
     }
 
     get() {
@@ -55,7 +36,6 @@ export class ProductsComponent implements OnInit,OnDestroy {
 
     onUpdateNotify(product) {
         console.log("Updated notifiction");
-        this.frm.setValue(product);
     }
 
     ngOnChanges(){

@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  baseUrl: "http://localhost:3000/api/products/"
+  baseUrl: "https://express-api.herokuapp.com/api/products/"
 };
