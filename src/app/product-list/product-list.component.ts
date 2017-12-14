@@ -1,24 +1,27 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ProductService } from "../shared/product.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'app-products',
     templateUrl: './product-list.html'
 })
-export class ProductsComponent implements OnInit,OnDestroy {
+export class ProductsComponent implements OnInit, OnDestroy {
     products: any[];
     product: any = {};
     obs;
 
-    constructor(private productSvc: ProductService, private fb: FormBuilder) { }
+    constructor(private productSvc: ProductService, private fb: FormBuilder, private route: ActivatedRoute) { }
 
     ngOnInit() {
-        this.get();
+        var response = this.route.snapshot.data["response"];
+        this.products = response ? response.products : [];
+        //this.get();
     }
 
     get() {
-      this.obs= this.productSvc.get()
+        this.obs = this.productSvc.get()
             .subscribe(
             response => {
                 this.products = response["products"];
@@ -38,11 +41,11 @@ export class ProductsComponent implements OnInit,OnDestroy {
         console.log("Updated notifiction");
     }
 
-    ngOnChanges(){
-        
+    ngOnChanges() {
+
     }
 
     ngOnDestroy() {
-        this.obs.unsubscribe();
+        //this.obs.unsubscribe();
     }
 }

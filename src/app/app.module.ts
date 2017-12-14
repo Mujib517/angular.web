@@ -18,23 +18,19 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductResolve } from "./shared/product.resolve";
+import { SpecsComponent } from './specs/specs.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { RoutingModule } from "./shared/routing.module";
+import { SharedModule } from "./shared/shared.module";
 
-const ROUTES = [
-    { path: '', component: HomeComponent },
-    { path: 'about', component: AboutComponent },
-    { path: 'contact', component: ContactComponent },
-    { path: 'products', component: ProductsComponent },
-    { path: 'products/new', component: NewProductComponent },
-    { path: 'products/:id', component: ProductDetailComponent },
-    { path: '**', component: HomeComponent }
-];
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule,
-        RouterModule.forRoot(ROUTES)],
+        RoutingModule,SharedModule],
     declarations: [AppComponent, HomeComponent,
-        AboutComponent, ContactComponent, ProductsComponent, ProductComponent, UsersComponent, TimePipe, HeaderComponent, FooterComponent, NewProductComponent, ProductDetailComponent],
+        AboutComponent, ContactComponent, ProductsComponent, ProductComponent, UsersComponent, HeaderComponent, FooterComponent, NewProductComponent, ProductDetailComponent, SpecsComponent, ReviewsComponent],
     bootstrap: [AppComponent],
-    providers: [ProductService]
+    providers: []
 })
 export class AppModule { }

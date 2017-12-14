@@ -8,6 +8,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class ProductService {
 
+    public cachedProduct = {};
+
     private baseUrl: string = environment.baseUrl;
 
     constructor(private httpClient: HttpClient) { }
