@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { LoggerService } from "../shared/logger.service";
 
 @Component({
     selector: 'app-home',
@@ -7,5 +8,11 @@ import { Component } from "@angular/core";
     `
 })
 export class HomeComponent {
-   
+    constructor(private logger: LoggerService) {
+
+    }
+
+    ngOnInit() {
+        this.logger.warn("Component took lot of time to load");
+    }
 }

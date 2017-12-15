@@ -5,11 +5,16 @@ import { ProductResolve } from "./product.resolve";
 import { UserService } from "./user.service";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from "./interceptor";
+import { LoggerService } from "./logger.service";
+import { FileLoggerService } from "./file.logger";
 
 
 @NgModule({
     declarations: [TimePipe],
-    providers: [ProductService, ProductResolve, UserService,
+    providers: [ProductService, ProductResolve, UserService, {
+        provide: LoggerService,
+        useClass: FileLoggerService
+    },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: Interceptor,
