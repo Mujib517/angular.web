@@ -9,6 +9,7 @@ import { NewProductComponent } from "../new-product/new-product.component";
 import { ProductDetailComponent } from "../product-detail/product-detail.component";
 import { SpecsComponent } from "../specs/specs.component";
 import { ReviewsComponent } from "../reviews/reviews.component";
+import { LoginComponent } from "../login/login.component";
 
 
 const CHILDREN = [
@@ -18,6 +19,7 @@ const CHILDREN = [
 
 const ROUTES = [
     { path: '', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'products', component: ProductsComponent, resolve: { response: ProductResolve } },

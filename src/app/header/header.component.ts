@@ -13,6 +13,10 @@ import { Component, OnInit } from '@angular/core';
               <li><a routerLink="/products">Products</a></li>
               <li><a routerLink="/contact">Contact</a></li>
           </ul>
+
+          <div class="pull-right">
+              <a routerLink="/login" class="btn btn-sm btn-danger">Login</a>
+          </div>
       </div>
   </div>
 </header>

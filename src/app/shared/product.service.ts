@@ -15,20 +15,20 @@ export class ProductService {
     constructor(private httpClient: HttpClient) { }
 
     get() {
-        return this.httpClient.get(this.baseUrl + "0/16")
+        return this.httpClient.get(this.baseUrl + "api/products/" + "0/16")
             .catch((err) => Observable.throw("Failed to load data"));
     }
 
     getById(id: string) {
-        return this.httpClient.get(this.baseUrl + id);
+        return this.httpClient.get(this.baseUrl + "api/products/" + id);
     }
 
     save(product: any) {
-        return this.httpClient.post(this.baseUrl, product)
+        return this.httpClient.post(this.baseUrl + "api/products/", product)
             .catch((err) => Observable.throw(err));
     }
 
     delete(id: string) {
-        return this.httpClient.delete(this.baseUrl + id);
+        return this.httpClient.delete(this.baseUrl + "api/products/" + id);
     }
 }

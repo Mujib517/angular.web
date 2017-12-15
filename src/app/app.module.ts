@@ -23,13 +23,14 @@ import { SpecsComponent } from './specs/specs.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { RoutingModule } from "./shared/routing.module";
 import { SharedModule } from "./shared/shared.module";
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule,
         RoutingModule,SharedModule],
     declarations: [AppComponent, HomeComponent,
-        AboutComponent, ContactComponent, ProductsComponent, ProductComponent, UsersComponent, HeaderComponent, FooterComponent, NewProductComponent, ProductDetailComponent, SpecsComponent, ReviewsComponent],
+        AboutComponent, ContactComponent, ProductsComponent, ProductComponent, UsersComponent, HeaderComponent, FooterComponent, NewProductComponent, ProductDetailComponent, SpecsComponent, ReviewsComponent, LoginComponent],
     bootstrap: [AppComponent],
     providers: []
 })
