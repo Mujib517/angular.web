@@ -7,10 +7,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from "./interceptor";
 import { LoggerService } from "./logger.service";
 import { FileLoggerService } from "./file.logger";
+import { ShowDirective } from "./show.directive";
+import { IfDirective } from "./if.directive";
 
 
 @NgModule({
-    declarations: [TimePipe],
+    declarations: [TimePipe, ShowDirective, IfDirective],
     providers: [ProductService, ProductResolve, UserService, {
         provide: LoggerService,
         useClass: FileLoggerService
@@ -21,6 +23,8 @@ import { FileLoggerService } from "./file.logger";
             multi: true
         }
     ],
-    exports: [TimePipe]
+    exports: [TimePipe, ShowDirective, IfDirective]
 })
 export class SharedModule { }
+
+
