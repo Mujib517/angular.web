@@ -4,17 +4,18 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../environments/environment';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
+import { Product } from "./models/product.model";
 
 @Injectable()
 export class ProductService {
 
-    public cachedProduct = {};
+    public cachedProduct: Product = new Product();
 
     private baseUrl: string = environment.baseUrl;
 
     constructor(private httpClient: HttpClient) { }
 
-    get() {
+    get(): Observable<Product[]> {
         return this.httpClient.get(this.baseUrl + "api/products/" + "0/16")
             .catch((err) => Observable.throw("Failed to load data"));
     }

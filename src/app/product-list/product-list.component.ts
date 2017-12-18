@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ProductService } from "../shared/product.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
+import { Product } from "../shared/models/product.model";
 
 @Component({
     selector: 'app-products',
     templateUrl: './product-list.html'
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-    products: any[];
+    products: Product[];
     product: any = {};
     obs;
 
@@ -17,6 +18,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     ngOnInit() {
         var response = this.route.snapshot.data["response"];
         this.products = response ? response.products : [];
+
         //this.get();
     }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../shared/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { Product } from '../shared/models/product.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -8,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styles: []
 })
 export class ProductDetailComponent implements OnInit {
-  product: any = {};
+  product: Product = new Product();
   id: string;
   constructor(private productSvc: ProductService, private route: ActivatedRoute) { }
 
@@ -18,8 +19,9 @@ export class ProductDetailComponent implements OnInit {
     this.productSvc.getById(this.id)
       .subscribe(
       data => {
-        this.productSvc.cachedProduct = data;
-        this.product = data
+        this.productSvc.cachedProduct = <Product>data;
+        this.product = <Product>data;
+        //LHS == RHS
       },
       err => console.log(err)
       );
