@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-about',
-  templateUrl:'./about.html'        
+  templateUrl: './about.html'
 })
-export class AboutComponent {}
+export class AboutComponent {
+  myProperty: any;
+
+  ngOnInit() {
+    this.myProperty = "Some Value";
+  }
+}
