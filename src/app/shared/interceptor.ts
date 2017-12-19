@@ -8,17 +8,17 @@ import 'rxjs/add/operator/do';
 export class Interceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        return next.handle(req);
+        // var token = localStorage.getItem("token");
 
-        var token = localStorage.getItem("token");
-        
-        var newReq = req.clone({ headers: req.headers.set("authorization", token) });
+        // var newReq = req.clone({ headers: req.headers.set("authorization", token) });
 
-        return next.handle(newReq)
-            .do(
-            (res: HttpEvent<any>) => console.log('interceptr', res["body"]))
-            .catch(err => {
-                console.log(err)
-                return Observable.throw(err);
-            });
+        // return next.handle(newReq)
+        //     .do(
+        //     (res: HttpEvent<any>) => console.log('interceptr', res["body"]))
+        //     .catch(err => {
+        //         console.log(err)
+        //         return Observable.throw(err);
+        //     });
     }
 }

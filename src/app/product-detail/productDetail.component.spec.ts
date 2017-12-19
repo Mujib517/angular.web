@@ -1,4 +1,6 @@
 import { ProductDetailComponent } from './product-detail.component';
+import { Observable } from 'rxjs/Observable';
+
 
 describe("Home Component", () => {
 
@@ -13,12 +15,17 @@ describe("Home Component", () => {
     };
 
     beforeEach(() => {
-        svc.getById = jasmine.createSpy("getById").and.returnValue({ subscribe: function () { }});
+        let obs = new Observable(o=>{
+            o.next(1),
+            o.next(2),
+            o.next(3)
+        });
+        svc.getById = jasmine.createSpy("getById").and.returnValue(obs);
         comp = new ProductDetailComponent(svc, activatedRoute);
     });
 
 
-    fit('should make a webservice call', () => {
+    it('should make a webservice call', () => {
         comp.ngOnInit();
 
         expect(svc.getById).toHaveBeenCalledWith(10);
