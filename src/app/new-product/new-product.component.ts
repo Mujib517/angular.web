@@ -26,9 +26,9 @@ import { Router } from '@angular/router';
           </div>
           <div class="form-group">
               <input type="text" placeholder="Model" class="form-control" formControlName="model" />
-              <span *ngIf="frm.controls.model.touched && frm.controls.model.errors?.required">Required</span>
-              <span *ngIf="frm.controls.model.touched && frm.controls.model.errors?.minlength">Min 3 Chars</span>
-              <span *ngIf="frm.controls.model.touched && frm.controls.model.errors?.maxlength">Max 10 Chars</span>
+              <span class="text-danger"  *ngIf="frm.controls.model.touched && frm.controls.model.errors?.required">Required</span>
+              <span class="text-danger" *ngIf="frm.controls.model.touched && frm.controls.model.errors?.minlength">Min 3 Chars</span>
+              <span class="text-danger" *ngIf="frm.controls.model.touched && frm.controls.model.errors?.maxlength">Max 10 Chars</span>
           </div>
           <div class="form-group">
               <input type="number" placeholder="Price" class="form-control" formControlName="price" />

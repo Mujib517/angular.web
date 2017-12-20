@@ -2,7 +2,7 @@ import { ProductDetailComponent } from './product-detail.component';
 import { Observable } from 'rxjs/Observable';
 
 
-describe("Home Component", () => {
+describe("Product Detail Component", () => {
 
     let comp: ProductDetailComponent;
     let svc = jasmine.createSpyObj("productSvc", ["getById"]);
