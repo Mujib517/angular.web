@@ -69,10 +69,10 @@ describe("Home Page", () => {
         expect(btn.isEnabled()).toBe(true);
     });
 
-    it('should have button enabled', () => {
+    it('should Save product', () => {
         let btn = element(by.css("button.btn.btn-success"));
         btn.click();
-
+        browser.waitForAngular();
         expect(browser.getCurrentUrl()).toBe("http://localhost:49152/products");
     });
 });
