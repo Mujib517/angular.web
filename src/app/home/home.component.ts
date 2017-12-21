@@ -5,29 +5,43 @@ import { HttpClient } from "@angular/common/http";
 @Component({
     selector: 'app-home',
     template: `
-    <h1>Home Page</h1>
-    <h1 [dirShow]="showHeading">Heading</h1>
-    <h1 *dirIf="showHeading">Heading 2</h1>
 
-    <h1>{{count}}</h1>
+    <mat-toolbar>
+        <button mat-button>Home</button>
+        <button mat-button>About</button>
+    </mat-toolbar>
 
-    <button (click)="inc()" class="btn btn-success">++</button>
+    <button mat-button>Click</button>
+    <button mat-raised-button>Click</button>
+    <button mat-fab>
+        <i class="fa fa-plus"></i>
+    </button>
+
+    <button mat-mini-fab>
+    <i class="fa fa-plus"></i>
+</button>
+
+<mat-checkbox></mat-checkbox>
+
+<mat-form-field>
+    <input type="text" matInput placeholder="Name"/>
+</mat-form-field>
+
+
+<mat-select placeholder="Select Item">
+    <mat-option value="1">Option 1</mat-option>
+    <mat-option value="2">Option 2</mat-option>
+</mat-select>
+
+<mat-radio-group>
+<mat-radio-button value="1">Option 1</mat-radio-button>
+<mat-radio-button value="2">Option 2</mat-radio-button>
+</mat-radio-group>
+
+<mat-slide-toggle>on</mat-slide-toggle>
+<mat-spinner></mat-spinner>
     `
 })
 export class HomeComponent {
-    showHeading = true;
-    count = 0;
 
-    constructor(private logger: LoggerService) { }
-
-    ngOnInit() {
-        // this.httpClient.get('https://api.github.com/users')
-        //     .subscribe(() => this.count++);
-
-        this.logger.warn("Component took lot of time to load");
-    }
-
-    inc() {
-        this.count++;
-    }
 }
